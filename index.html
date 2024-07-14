@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Korttipeli</title>
+    <style type="text/css">
+        body{
+          background: transparent;
+        }
+        .random{
+          text-align: center;
+          font-family: Arial, Helvetica, sans-serif;
+          border-radius: 50%;
+          border: 6px solid rgb(255, 255, 255);
+          background-color: #ff22e2;
+          color: #fff;
+          padding: 20px;
+          margin-top: 200px;
+          cursor: pointer;
+          font-size:25px;
+          transform: rotate(10deg);
+        }
+        .wrapper{
+          position: absolute; 
+          top:10%;left:50%;
+          transform: translate(-50%,-50%);
+          transform: rotate(-10deg);
+        }
+        .resetointi
+        {
+          text-align: center;
+          font-family: Arial, Helvetica, sans-serif;
+          border-radius: 50%;
+          border: 6px solid rgb(255, 255, 255);
+          background-color: #ff22e2;
+          margin-left: 40px;
+          color: #fff;
+          padding: 20px;
+          cursor: pointer;
+          margin-top: 20px;
+          font-size:25px;
+          transform: rotate(10deg);
+        }
+      </style>
+</head>
+<body>
+
+      <div class="wrapper">
+        <div>
+          <img id="card" src="cards/as.svg">
+          <div class="random" onclick="random();" type="button">CARD</div>
+        </div>
+        <button onClick="window.location.reload();" class="resetointi">RESET</button>
+      </div>
+<!--äänitiedosto-->
+      <audio
+      controls="controls"
+      id="cardshuffle"
+      src="cardshuffle.mp3"
+      type="audio/mp3"
+    hidden></audio>
+
+    <script>
+function random() {
+  // Play the sound
+}
+    </script>
+
+      <script>
+      function shuffleArray(array) {
+        for (var i = array.length - 1; i > 0; i--) {
+          var j = Math.floor(Math.random() * (i + 1));
+          var temp = array[i];
+          array[i] = array[j];
+          array[j] = temp;
+        }
+        return array;
+      }
+      var cards = ['a','2','3','4','5','6','7','8','9','10','j','q','k']; // ,'j','q','k'
+      var types = ['c','d','h','s']; //club, diamond, hearts, spades
+      cards = shuffleArray(cards);
+      types = shuffleArray(types);
+      var card = document.getElementById('card');
+      var btn = document.getElementById('btn');
+      function random(){
+        randomize = setInterval(function(){
+          cards = shuffleArray(cards);
+          types = shuffleArray(types);
+          card.setAttribute('src','cards/'+cards[0]+types[0]+'.svg');
+        },60); 
+        setTimeout(function(){
+          clearInterval(randomize);
+        },4000);
+
+        cardshuffle.play();
+      }
+      
+      </script>
+
+</body>
+</html>
